@@ -1,0 +1,50 @@
+onboarding = false
+[theme]
+name = "gruvbox"
+auto_switch = false
+
+# ── neon grid: green + cyan on near-black ────────
+[theme.custom]
+accent        = "#39ff14"   # neon green
+panel_bg      = "reset"     # keep terminal background
+sidebar_bg    = "#050d0a"
+active_row_bg = "#0b2a22"
+selection_bg  = "#0a3a3f"
+surface_dim   = "#07120e"
+surface0      = "#0c1c17"
+surface1      = "#123029"
+overlay0      = "#2a5e52"
+overlay1      = "#4a9a86"
+text          = "#d8fff0"
+subtext0      = "#8fe3cf"
+green         = "#39ff14"
+teal          = "#00fff0"
+blue          = "#00c8ff"
+mauve         = "#7df9ff"
+yellow        = "#d4ff00"
+peach         = "#ffb000"
+red           = "#ff2a6d"
+
+[keys]
+# Collapse/expand the sidebar: press the prefix (ctrl+b), then b.
+toggle_sidebar = "prefix+b"
+
+[ui.toast]
+delivery = "off"
+
+[ui.sound]
+enabled = true
+
+[ui]
+show_agent_labels_on_pane_borders = true
+tab_bar_position = "bottom"
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "hostname" },
+  { type = "datetime", format = "%H:%M" },
+  { type = "text", text = " " },
+  { type = "command", command = "~/.config/herdr/status.sh", interval_seconds = 5, timeout_seconds = 2 },
+]
+tab_bar_right_separator = " · "
+
+status_indicators = "symbols"

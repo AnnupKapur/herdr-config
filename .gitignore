@@ -1,0 +1,18 @@
+# ── runtime sockets ──────────────────────────────
+*.sock
+
+# ── logs ─────────────────────────────────────────
+*.log
+
+# ── machine-local state ──────────────────────────
+# live workspace/tab/pane layout, absolute paths, agent session ids
+session.json
+# cached release notes fetched by herdr
+release-notes.json
+# plugin lockfile (runtime)
+.plugins.lock
+
+# ── os / editor cruft ────────────────────────────
+.DS_Store
+*.swp
+*~
