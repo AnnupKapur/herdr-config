@@ -24,7 +24,7 @@ multiplexer for wrangling a herd of coding agents.
 | Setting            | Value                                          |
 | ------------------ | ---------------------------------------------- |
 | 🎨 Theme           | neon green + cyan (custom colors on `gruvbox`)  |
-| ⌨️  Prefix          | `ctrl+b` — `prefix + b` toggles the sidebar     |
+| ⌨️  Prefix          | `ctrl+b` — `prefix + b` toggles sidebar, `prefix + =` equalizes pane widths |
 | 📑 Tab bar         | bottom, with zoom · hostname · `HH:MM` · status |
 | 🏷️  Pane borders    | show agent labels                              |
 | 🔔 Notifications   | toasts off, sounds on                          |
@@ -45,9 +45,10 @@ Restart herdr and you're done.
 
 ```
 ~/.config/herdr
-├── config.toml     ← the good stuff
-├── README.md       ← you are here
-└── .gitignore      ← keeps the noise out
+├── config.toml        ← the good stuff
+├── equalize-panes.py  ← equalizes pane widths (`prefix + =`)
+├── README.md          ← you are here
+└── .gitignore         ← keeps the noise out
 ```
 
 Not tracked (machine-local / runtime): `*.sock`, `*.log`, `session.json`,
