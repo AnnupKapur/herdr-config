@@ -9,8 +9,11 @@
 session.json
 # cached release notes fetched by herdr
 release-notes.json
-# plugin lockfile (runtime)
+# plugin registry, lockfile, & runtime dirs (machine-local / runtime)
+plugins.json
 .plugins.lock
+plugins/config/
+plugins/state/
 
 # ── os / editor cruft ────────────────────────────
 .DS_Store

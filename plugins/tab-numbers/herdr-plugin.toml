@@ -1,0 +1,43 @@
+id = "tab-numbers"
+name = "Tab Numbers"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Prefix tab labels with their 1-based position in the tab bar (e.g. 1:dev, 2:git, 3:db)"
+platforms = ["macos", "linux"]
+
+[[startup]]
+command = ["python3", "tab-numbers.py"]
+
+[[events]]
+on = "tab.created"
+command = ["python3", "tab-numbers.py"]
+
+[[events]]
+on = "tab.closed"
+command = ["python3", "tab-numbers.py"]
+
+[[events]]
+on = "tab.moved"
+command = ["python3", "tab-numbers.py"]
+
+[[events]]
+on = "tab.renamed"
+command = ["python3", "tab-numbers.py"]
+
+[[events]]
+on = "workspace.created"
+command = ["python3", "tab-numbers.py"]
+
+[[actions]]
+id = "sync"
+title = "Sync tab numbers"
+description = "Renumber all tabs in the current workspace"
+contexts = ["global", "workspace", "tab"]
+command = ["python3", "tab-numbers.py"]
+
+[[actions]]
+id = "strip"
+title = "Strip tab numbers"
+description = "Remove 1: / 2: / 3: prefixes from tabs"
+contexts = ["global", "workspace", "tab"]
+command = ["python3", "tab-numbers.py", "--strip"]

@@ -25,7 +25,7 @@ multiplexer for wrangling a herd of coding agents.
 | ------------------ | ---------------------------------------------- |
 | 🎨 Theme           | neon green + cyan (custom colors on `gruvbox`)  |
 | ⌨️  Prefix          | `ctrl+b` — `prefix + b` toggles sidebar, `prefix + =` equalizes pane widths |
-| 📑 Tab bar         | bottom, with zoom · hostname · `HH:MM` · status |
+| 📑 Tab bar         | bottom, numbered tabs (`1:dev`, `2:git`), zoom · hostname · `HH:MM` · status |
 | 🏷️  Pane borders    | show agent labels                              |
 | 🔔 Notifications   | toasts off, sounds on                          |
 | 🚦 Status          | symbol indicators                              |
@@ -37,6 +37,9 @@ multiplexer for wrangling a herd of coding agents.
 [ -d ~/.config/herdr ] && mv ~/.config/herdr ~/.config/herdr.bak
 
 git clone https://github.com/AnnupKapur/herdr-config.git ~/.config/herdr
+
+# link the tab-numbers plugin (prefixes tabs with 1:, 2:, 3: ...)
+herdr plugin link ~/.config/herdr/plugins/tab-numbers
 ```
 
 Restart herdr and you're done.
@@ -47,12 +50,14 @@ Restart herdr and you're done.
 ~/.config/herdr
 ├── config.toml        ← the good stuff
 ├── equalize-panes.py  ← equalizes pane widths (`prefix + =`)
+├── plugins/
+│   └── tab-numbers/   ← prefixes tab bar labels with 1-based position (`1:dev`, `2:git`)
 ├── README.md          ← you are here
 └── .gitignore         ← keeps the noise out
 ```
 
 Not tracked (machine-local / runtime): `*.sock`, `*.log`, `session.json`,
-`release-notes.json`, `.plugins.lock`.
+`release-notes.json`, `plugins.json`, `.plugins.lock`.
 
 ## ✦ Status script
 
