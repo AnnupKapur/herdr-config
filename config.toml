@@ -29,6 +29,13 @@ red = "#ff2a6d"
 # Collapse/expand the sidebar: press the prefix (ctrl+b), then b.
 toggle_sidebar = "prefix+b"
 
+# Cycle through agents in the sidebar: press the prefix (ctrl+b), then a / Shift+A.
+next_agent = "prefix+a"
+previous_agent = "prefix+shift+a"
+
+# Jump directly to agent 1-9 in the sidebar: press the prefix (ctrl+b), then Shift+1..9.
+focus_agent = "prefix+shift+1..9"
+
 # Equalize pane widths in the current tab: press the prefix (ctrl+b), then =.
 [[keys.command]]
 key = "prefix+="

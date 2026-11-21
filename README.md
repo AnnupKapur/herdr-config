@@ -24,7 +24,7 @@ multiplexer for wrangling a herd of coding agents.
 | Setting            | Value                                          |
 | ------------------ | ---------------------------------------------- |
 | 🎨 Theme           | neon green + cyan (custom colors on `gruvbox`)  |
-| ⌨️  Prefix          | `ctrl+b` — `prefix + b` toggles sidebar, `prefix + =` equalizes pane widths |
+| ⌨️  Prefix          | `ctrl+b` — `prefix + b` toggles sidebar, `prefix + a` / `prefix + A` cycles agents, `prefix + shift + 1..9` focuses agent 1–9, `prefix + =` equalizes pane widths |
 | 📑 Tab bar         | bottom, numbered tabs (`1:dev`, `2:git`), zoom · hostname · `HH:MM` · status |
 | 🏷️  Pane borders    | show agent labels                              |
 | 🔔 Notifications   | toasts off, sounds on                          |
