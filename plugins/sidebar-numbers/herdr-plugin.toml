@@ -52,6 +52,10 @@ command = ["python3", "sidebar-numbers.py"]
 on = "tab.closed"
 command = ["python3", "sidebar-numbers.py"]
 
+[[events]]
+on = "workspace.renamed"
+command = ["python3", "sidebar-numbers.py"]
+
 [[actions]]
 id = "sync"
 title = "Sync sidebar numbers"

@@ -16,6 +16,7 @@ import tempfile
 
 SOURCE = "sidebar-numbers"
 TOKEN = "idx"
+TOKEN_WS = "idx_ws"  # "<number> <workspace name>"
 
 
 def get_socket_path() -> str:
@@ -65,26 +66,39 @@ def sync(sock_path: str) -> int:
             errors += 1
             print(f"{SOURCE}: {method}: {res['error']}", file=sys.stderr)
 
+    def stale(current: dict | None, want: dict) -> bool:
+        current = current or {}
+        return any(current.get(k) != v for k, v in want.items())
+
     # Workspaces: use herdr's own workspace number.
+    ws_labels: dict[str, str] = {}
     for ws in result(sock_path, "workspace.list", "workspaces", {}):
-        want = str(ws.get("number", ""))
-        if (ws.get("tokens") or {}).get(TOKEN) != want:
+        num = str(ws.get("number", ""))
+        ws_labels[ws["workspace_id"]] = str(ws.get("label", ""))
+        want = {TOKEN: num, TOKEN_WS: f"{num} {ws_labels[ws['workspace_id']]}".strip()}
+        if stale(ws.get("tokens"), want):
             report("workspace.report_metadata",
-                   {"workspace_id": ws["workspace_id"], "source": SOURCE, "tokens": {TOKEN: want}})
+                   {"workspace_id": ws["workspace_id"], "source": SOURCE, "tokens": want})
 
     # Agents: position in agent.list (same order as the agent panel / focus_agent).
+    # TOKEN_WS combines number + workspace name into one value, so herdr doesn't
+    # insert its " · " separator between them.
     agents = result(sock_path, "agent.list", "agents", {})
-    wanted = {a["pane_id"]: str(i) for i, a in enumerate(agents, start=1)}
-    for a in agents:
-        if (a.get("tokens") or {}).get(TOKEN) != wanted[a["pane_id"]]:
+    agent_panes = set()
+    for i, a in enumerate(agents, start=1):
+        agent_panes.add(a["pane_id"])
+        want = {TOKEN: str(i), TOKEN_WS: f"{i} {ws_labels.get(a['workspace_id'], '')}".strip()}
+        if stale(a.get("tokens"), want):
             report("pane.report_metadata",
-                   {"pane_id": a["pane_id"], "source": SOURCE, "tokens": {TOKEN: wanted[a["pane_id"]]}})
+                   {"pane_id": a["pane_id"], "source": SOURCE, "tokens": want})
 
     # Clear stale numbers from panes that are no longer agents.
     for pane in result(sock_path, "pane.list", "panes", {}):
-        if pane["pane_id"] not in wanted and TOKEN in (pane.get("tokens") or {}):
+        tokens = pane.get("tokens") or {}
+        if pane["pane_id"] not in agent_panes and (TOKEN in tokens or TOKEN_WS in tokens):
             report("pane.report_metadata",
-                   {"pane_id": pane["pane_id"], "source": SOURCE, "tokens": {TOKEN: None}})
+                   {"pane_id": pane["pane_id"], "source": SOURCE,
+                    "tokens": {TOKEN: None, TOKEN_WS: None}})
 
     return 1 if errors else 0
 

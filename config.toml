@@ -63,10 +63,12 @@ tab_bar_right_separator = " · "
 
 status_indicators = "symbols"
 
-# Expanded sidebar rows. `$idx` is the 1-based position published by the
-# sidebar-numbers plugin, matching the collapsed-sidebar numbers.
+# Expanded sidebar rows. `$idx_ws` ("<n> <workspace>") is published by the
+# sidebar-numbers plugin; n matches the collapsed-sidebar numbers. Number and
+# name share one token so herdr doesn't put a " · " separator between them.
+# Styled bold + theme `text` color to match the built-in workspace label.
 [ui.sidebar.agents]
-rows = [["$idx", "state_icon", "machine", "workspace", "tab"], ["agent"]]
+rows = [["state_icon", { token = "$idx_ws", fg = "#d8fff0", bold = true, dim = false }], ["agent"]]
 
 [ui.sidebar.spaces]
-rows = [["$idx", "state_icon", "workspace"], ["branch", "git_status"]]
+rows = [["state_icon", { token = "$idx_ws", fg = "#d8fff0", bold = true, dim = false }], ["branch", "git_status"]]
